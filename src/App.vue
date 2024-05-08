@@ -1,6 +1,14 @@
 <script>
 import axios from 'axios';
+import AppHeader from "../src/components/AppHeader.vue";
+import AppMain from "../src/components/AppMain.vue";
+
 export default {
+  components: {
+    AppHeader,
+    AppMain
+  },
+
   data(){
     return {
 
@@ -11,7 +19,8 @@ export default {
 </script>
 
 <template>
-
+  <AppHeader />
+  <AppMain />
 </template>
 
 <style>
