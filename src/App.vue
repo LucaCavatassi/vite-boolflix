@@ -31,6 +31,7 @@ export default {
       }).then((resp) => {
         this.store.moviesArray = resp.data.results
         console.log(this.store.moviesArray);
+        this.store.searchQuery = ""
       });
 
     },
@@ -43,6 +44,7 @@ export default {
       }).then((resp) => {
         this.store.seriesArray = resp.data.results
         console.log(this.store.seriesArray);
+        this.store.searchQuery = ""
       });
 
     }
@@ -52,7 +54,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search="[searchMovies(), searchSeries()]" />
+  <AppHeader @search="[searchMovies(), searchSeries()]" @keyup.enter="[searchMovies(), searchSeries()]" />
   <AppMain />
 </template>
 

@@ -13,8 +13,7 @@ export default {
 
 <template>
     <div>
-        <input type="text" id="searchQuery" v-model="this.store.searchQuery">
-        <label for="searchQuery"></label>
+        <input type="text" id="searchQuery" aria-label="searchQuery" v-model="this.store.searchQuery">
         <button @click="$emit('search')" type="button">Cerca</button>
     </div>
 
