@@ -33,6 +33,18 @@ export default {
         console.log(this.store.moviesArray);
       });
 
+    },
+
+    searchSeries() {
+      axios.get("https://api.themoviedb.org/3/search/tv?api_key=119bcd8d57bfd115fef5559216eb0836", {
+        params: {
+          query: this.store.searchQuery
+        }
+      }).then((resp) => {
+        this.store.seriesArray = resp.data.results
+        console.log(this.store.seriesArray);
+      });
+
     }
   }
 }
@@ -40,7 +52,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search="searchMovies" />
+  <AppHeader @search="[searchMovies(), searchSeries()]" />
   <AppMain />
 </template>
 
