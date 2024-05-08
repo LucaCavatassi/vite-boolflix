@@ -1,14 +1,17 @@
 <script>
+import {store} from "/src/store.js"
 import MovieCard from "/src/components/MovieCard.vue";
+import SeriesCard from "/src/components/SeriesCard.vue"
 
 export default {
     components: {
-        MovieCard
+        MovieCard,
+        SeriesCard
     },
 
     data(){
         return {
-
+            store,
         }
     }
 }
@@ -16,8 +19,8 @@ export default {
 </script>
 
 <template>
-<h1>Main</h1>
 <MovieCard />
+<SeriesCard />
 
 </template>
 
