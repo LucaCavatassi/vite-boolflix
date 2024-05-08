@@ -1,5 +1,6 @@
 <script>
-import axios from 'axios';
+import axios from "axios";
+import { store } from "../src/store.js";
 import AppHeader from "../src/components/AppHeader.vue";
 import AppMain from "../src/components/AppMain.vue";
 
@@ -9,8 +10,28 @@ export default {
     AppMain
   },
 
-  data(){
+  data() {
     return {
+      store,
+
+    }
+  },
+
+  created() {
+
+
+  },
+
+  methods: {
+    searchMovies() {
+      axios.get("https://api.themoviedb.org/3/search/movie?api_key=119bcd8d57bfd115fef5559216eb0836", {
+        params: {
+          query: this.store.searchQuery
+        }
+      }).then((resp) => {
+        this.store.moviesArray = resp.data.results
+        console.log(this.store.moviesArray);
+      });
 
     }
   }
@@ -19,10 +40,8 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @search="searchMovies" />
   <AppMain />
 </template>
 
-<style>
-
-</style>
+<style></style>
