@@ -8,7 +8,8 @@ export default {
             ukFlag: "uk_emoji",
             jpFlag: "jp_emoji",
             skFlag: "sk_emoji",
-            cnFlag: "ch_emoji"
+            cnFlag: "ch_emoji",
+            noImage: "no_image"
         }
     },
 
@@ -19,6 +20,14 @@ export default {
 
         getImageUrl(name) {
             return new URL(`/src/assets/img/${name}.png`, import.meta.url).href
+        },
+
+        getPosters(index) {
+            return "https://image.tmdb.org/t/p/w500" + this.store.seriesArray[index].poster_path
+        },
+
+        getBackdrop(index) {
+            return "https://image.tmdb.org/t/p/w500" + this.store.seriesArray[index].backdrop_path
         }
     }
 }
@@ -30,6 +39,9 @@ export default {
             <h1 v-if="this.store.seriesArray.length > 0">Tv Series</h1>
             <div class="col d-flex justify-content-center mb-4"  v-for="(element, index) in this.store.seriesArray">
                 <div class="card" style="width: 18rem;">
+                    <img v-if="this.store.seriesArray[index].poster_path !== null" :src="getPosters(index)" class="card-img-top" :alt="element.name">
+                    <img v-else :src="getImageUrl(noImage)" :alt="element.name">
+                
                     <div class="card-body">
                         <h5 class="card-title fs-3 mb-0" >{{ element.name }}</h5>
                         <span class="my-small-fs"><i>Original Title</i></span>
