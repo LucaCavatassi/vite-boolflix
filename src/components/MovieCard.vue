@@ -5,17 +5,20 @@ export default {
     data() {
         return {
             store,
-
+            ukFlag: "uk_emoji",
+            jpFlag: "jp_emoji",
+            skFlag: "sk_emoji",
+            cnFlag: "ch_emoji"
         }
     },
 
     methods: {
         getFlag(index) {
-            return "https://flagcdn.com/16x12/" + this.store.moviesArray[index].original_language + ".png"
+            return "https://flagcdn.com/20x15/" + this.store.moviesArray[index].original_language + ".png"
         },
 
         getImageUrl(name) {
-            return new URL(`../src/assets/${name}.png`, import.meta.url).href
+            return new URL(`/src/assets/img/${name}.png`, import.meta.url).href
         }
     }
 }
@@ -38,8 +41,15 @@ export default {
                             {{ element.original_title }}
                         </h6>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-0">
-                                <img :src="getFlag(index)">
+                            <span class="my-small-fs">
+                                <i>Original Language</i>
+                            </span>
+                            <li class="list-group-item px-0 py-0 pb-2">
+                                <img v-if="element.original_language === 'en'" :src="getImageUrl(ukFlag)" alt="{{ element.original_language }}">
+                                <img v-else-if="element.original_language === 'ja'" :src="getImageUrl(jpFlag)" alt="{{ element.original_language }}">
+                                <img v-else-if="element.original_language === 'ko'" :src="getImageUrl(skFlag)" alt="{{ element.original_language }}">
+                                <img v-else-if="element.original_language === 'zh'" :src="getImageUrl(cnFlag)" alt="{{ element.original_language }}">                
+                                <img v-else :src="getFlag(index)">
                             </li>
                             <li class="list-group-item px-0">
                                 {{ element.vote_average }}

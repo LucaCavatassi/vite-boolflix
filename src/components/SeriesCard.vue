@@ -5,16 +5,20 @@ export default {
     data() {
         return {
             store,
+            ukFlag: "uk_emoji",
+            jpFlag: "jp_emoji",
+            skFlag: "sk_emoji",
+            cnFlag: "ch_emoji"
         }
     },
 
     methods: {
         getFlag(index) {
-            return "https://flagcdn.com/16x12/" + this.store.seriesArray[index].original_language + ".png"
+            return "https://flagcdn.com/20x15/" + this.store.seriesArray[index].original_language + ".png"
         },
 
         getImageUrl(name) {
-            return new URL(`../src/assets/${name}.png`, import.meta.url).href
+            return new URL(`/src/assets/img/${name}.png`, import.meta.url).href
         }
     }
 }
@@ -32,7 +36,11 @@ export default {
                         <h6 class="card-subtitle mb-2 text-body-secondary pt-1">{{ element.original_name }}</h6>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item px-0">
-                                <img :src="getFlag(index)">
+                                <img v-if="element.original_language === 'en'" :src="getImageUrl(ukFlag)" alt="{{ element.original_language }}">
+                                <img v-else-if="element.original_language === 'ja'" :src="getImageUrl(jpFlag)" alt="{{ element.original_language }}">
+                                <img v-else-if="element.original_language === 'ko'" :src="getImageUrl(skFlag)" alt="{{ element.original_language }}">
+                                <img v-else-if="element.original_language === 'zh'" :src="getImageUrl(cnFlag)" alt="{{ element.original_language }}">                
+                                <img v-else :src="getFlag(index)">
                             </li>
                             <li class="list-group-item">{{ element.vote_average }}</li>
                         </ul>
