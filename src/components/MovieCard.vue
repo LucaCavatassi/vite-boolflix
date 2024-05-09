@@ -39,7 +39,7 @@ export default {
             <h1 v-if="this.store.moviesArray.length > 0">Movies</h1>
             <!--/SECTION_TITLE -->
 
-            <div class="col d-flex justify-content-center mb-4" v-for="(element, index) in this.store.moviesArray">
+            <div class="col col-lg-3 d-flex justify-content-center mb-4" v-for="(element, index) in this.store.moviesArray">
                 <!-- CARD -->
                 <div class="card" style="width: 18rem;">
                     <!-- POSTER -->

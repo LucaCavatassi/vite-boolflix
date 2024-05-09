@@ -41,7 +41,7 @@ export default {
             <!-- /SECTION_TITLE -->
 
 
-            <div class="col d-flex justify-content-center mb-4"  v-for="(element, index) in this.store.seriesArray">
+            <div class="col col-lg-3 d-flex justify-content-center mb-4"  v-for="(element, index) in this.store.seriesArray">
                 <!-- CARD -->
                 <div class="card" style="width: 18rem;">
                     <!-- POSTER -->
