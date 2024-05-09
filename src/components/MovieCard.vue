@@ -43,8 +43,8 @@ export default {
                 <!-- CARD -->
                 <div class="card" style="width: 18rem;">
                     <!-- POSTER -->
-                    <img v-if="this.store.moviesArray[index].poster_path !== null" :src="getPosters(index)" class="card-img-top" :alt="element.title">
-                    <img v-else :src="getImageUrl(noImage)" :alt="element.name">
+                    <img v-if="this.store.moviesArray[index].poster_path !== null" :src="getPosters(index)" class="card-img-top my_img_size" :alt="element.title">
+                    <img v-else :src="getImageUrl(noImage)" :alt="element.name" class="my_img_size">
                     <!-- /POSTER -->
 
                     <!-- BODY -->
@@ -90,5 +90,10 @@ export default {
 <style scoped lang="scss">
 .my-small-fs {
     font-size: 0.7rem;
+}
+
+.my_img_size{
+    height: 429px;
+    object-fit: cover;
 }
 </style>
