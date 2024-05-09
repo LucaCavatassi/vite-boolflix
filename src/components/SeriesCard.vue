@@ -41,19 +41,21 @@ export default {
 
 <template>
     <div class="container">
+        <!-- SECTION_TITLE -->
+        <h1 class="ms_title" v-if="this.store.seriesArray.length > 0">Tv Series</h1>
+        <!-- /SECTION_TITLE -->
         <div class="row">
-            <!-- SECTION_TITLE -->
-            <h1 v-if="this.store.seriesArray.length > 0">Tv Series</h1>
-            <!-- /SECTION_TITLE -->
-
-
-            <div class="col col-lg-3 d-flex justify-content-center mb-4"  v-for="(element, index) in this.store.seriesArray">
+            
+            
+            <div class="col-xs-12 col-lg-4 col-xl-3  d-flex justify-content-center mb-4"  v-for="(element, index) in this.store.seriesArray">
                 <!-- CARD -->
-                <div class="card" style="width: 18rem;">
-                    <!-- POSTER -->
-                    <img v-if="this.store.seriesArray[index].poster_path !== null" :src="getPosters(index)" class="card-img-top my_img_size" :alt="element.name">
-                    <img v-else :src="getImageUrl(noImage)" :alt="element.name" class="my_img_size">
-                    <!-- /POSTER -->
+                <div class="card">
+                    <div class="my-img-card">
+                        <!-- POSTER -->
+                        <img v-if="this.store.seriesArray[index].poster_path !== null" :src="getPosters(index)" class="card-img-top my_img_size" :alt="element.name">
+                        <img v-else :src="getImageUrl(noImage)" :alt="element.name" class="my_img_size">
+                        <!-- /POSTER -->
+                    </div>
                     
                     <!-- BODY -->
                     <div class="card-body">
@@ -81,60 +83,73 @@ export default {
                             <!-- /LANG_FLAG -->
 
                             <!-- VOTE -->
-                            <li class="list-group-item px-0">
-                                <!-- STARS -->
+                            <span class="my-small-fs">
+                            <i>Rating</i>
+                            </span>
+                            <!-- STARS -->
+                                <li class="list-group-item px-0 py-0">
+                                    <!-- STARS -->
+                                    <span v-if="convVote(index) ===  0 || convVote(index) ===  0.5">
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
 
-                                <span v-if="convVote(index) ===  0 || convVote(index) ===  0.5">
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                </span>
+                                    <span v-else-if="convVote(index) ===  1 || convVote(index) ===  1.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
 
-                                <span v-else-if="convVote(index) ===  1 || convVote(index) ===  1.5">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                </span>
+                                    <span v-else-if="convVote(index) ===  2 || convVote(index) ===  2.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
 
-                                <span v-else-if="convVote(index) ===  2 || convVote(index) ===  2.5">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                </span>
+                                    <span v-else-if="convVote(index) ===  3 || convVote(index) ===  3.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
 
-                                <span v-else-if="convVote(index) ===  3 || convVote(index) ===  3.5">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                </span>
+                                    <span v-else-if="convVote(index) ===  4 || convVote(index) ===  4.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
 
-                                <span v-else-if="convVote(index) ===  4 || convVote(index) ===  4.5">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                </span>
-
-                                <span v-else-if="convVote(index) ===  5">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </span>
-                                <!-- /STARS -->
-                                
-                            </li>
+                                    <span v-else-if="convVote(index) ===  5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </span>
+                                    <!-- /STARS -->
+                                    
+                                </li>
+                            <!-- /STARS -->
                             <!-- VOTE -->
+                            <!-- OVERVIEW -->
+                            <span class="my-small-fs pt-2">
+                            <i>Overview</i>
+                            </span>
+                            <li class="my-overview list-group-item fs-6 px-0 py-0">
+                                <span v-if="element.overview !== ''">{{ element.overview }}</span>
+                                <span v-else>Overview not found.</span>
+                            </li>
+                            <!-- /OVERVIEW -->
                         </ul>
                         <!-- INFO -->
                     </div>
@@ -153,6 +168,35 @@ export default {
 
 .my_img_size{
     height: 429px;
+    width: 100%;
     object-fit: cover;
+}
+
+.ms_title{
+    color: #E50914;
+    font-weight: bold;
+    text-shadow: black 1px 1px 30px;
+}
+
+.card{
+    width: 18rem;
+    border: 0px solid;
+}
+.card-body {
+    display: none;
+    height: 429px;
+    width: 100%;
+    overflow: scroll;
+}
+
+.card:hover{
+    box-shadow: #E50914 1px 1px 30px;
+}
+
+.card:hover .card-body{
+    display: block;
+}
+.card:hover .my-img-card{
+    display: none;
 }
 </style>

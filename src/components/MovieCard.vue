@@ -10,6 +10,7 @@ export default {
             skFlag: "sk_emoji",
             cnFlag: "ch_emoji",
             noImage: "no_image",
+            activeIndex: 0,
         }
     },
 
@@ -34,8 +35,7 @@ export default {
             let vote = parseFloat(this.store.moviesArray[index].vote_average)
             let splitVote = Math.round(Math.round(vote * 2) / 2) / 2
             return splitVote
-        }
-
+        },
     
     }
 }
@@ -45,16 +45,18 @@ export default {
     <div class="container">
         <div class="row">
             <!-- SECTION_TITLE -->
-            <h1 v-if="this.store.moviesArray.length > 0">Movies</h1>
+            <h1 class="ms_title" v-if="this.store.moviesArray.length > 0">Movies</h1>
             <!--/SECTION_TITLE -->
 
-            <div class="col col-lg-3 d-flex justify-content-center mb-4" v-for="(element, index) in this.store.moviesArray">
+            <div class="col col-lg-4 col-xl-3 d-flex justify-content-center mb-4" v-for="(element, index) in this.store.moviesArray">
                 <!-- CARD -->
-                <div class="card" style="width: 18rem;">
-                    <!-- POSTER -->
-                    <img v-if="this.store.moviesArray[index].poster_path !== null" :src="getPosters(index)" class="card-img-top my_img_size" :alt="element.title">
-                    <img v-else :src="getImageUrl(noImage)" :alt="element.name" class="my_img_size">
-                    <!-- /POSTER -->
+                <div class="card">
+                    <div class="my-img-card">
+                        <!-- POSTER -->
+                        <img v-if="this.store.moviesArray[index].poster_path !== null" :src="getPosters(index)" class="card-img-top my_img_size" :alt="element.title">
+                        <img v-else :src="getImageUrl(noImage)" :alt="element.name" class="my_img_size">
+                        <!-- /POSTER -->
+                    </div>
 
                     <!-- BODY -->
                     <div class="card-body">
@@ -81,9 +83,11 @@ export default {
                                 <!-- /EMOJI -->
                             <!-- LANG_FLAG -->
                             <!-- VOTE -->
-                            <li class="list-group-item px-0">
+                            <span class="my-small-fs">
+                            <i>Rating</i>
+                            </span>
+                            <li class="list-group-item px-0 py-0">
                                 <!-- STARS -->
-
                                 <span v-if="convVote(index) ===  0 || convVote(index) ===  0.5">
                                     <i class="fa-regular fa-star"></i>
                                     <i class="fa-regular fa-star"></i>
@@ -135,6 +139,15 @@ export default {
                                 
                             </li>
                             <!-- VOTE -->
+                            <!-- OVERVIEW -->
+                            <span class="my-small-fs pt-2">
+                            <i>Overview</i>
+                            </span>
+                            <li class="list-group-item fs-6 px-0 py-0">
+                                <span v-if="element.overview !== ''">{{ element.overview }}</span>
+                                <span v-else>Overview not found.</span>
+                            </li>
+                            <!-- /OVERVIEW -->
                         </ul>
                         <!-- /INFO -->
                     </div>
@@ -153,6 +166,37 @@ export default {
 
 .my_img_size{
     height: 429px;
+    width: 100%;
     object-fit: cover;
 }
+
+.ms_title{
+    color: #E50914;
+    font-weight: bold;
+    text-shadow: black 1px 1px 30px;
+}
+
+.card{
+    width: 18rem;
+    border: 0px solid;
+}
+.card-body {
+    display: none;
+    height: 429px;
+    width: 100%;
+    overflow: scroll;
+
+}
+
+.card:hover{
+    box-shadow: #E50914 1px 1px 30px;
+}
+
+.card:hover .card-body{
+    display: block;
+}
+.card:hover .my-img-card{
+    display: none;
+}
+
 </style>

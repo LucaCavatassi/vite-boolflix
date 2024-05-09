@@ -47,7 +47,7 @@ export default {
         this.store.searchQuery = ""
       });
 
-    }
+    },
   }
 }
 
@@ -55,7 +55,18 @@ export default {
 
 <template>
   <AppHeader @search="[searchMovies(), searchSeries()]" @keyup.enter="[searchMovies(), searchSeries()]" />
-  <AppMain />
+  <AppMain class="app" />
 </template>
 
-<style></style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: "Kanit", sans-serif;
+    background-image: url(https://i.redd.it/4fxxbm4opjd31.jpg) ;
+    background-position: center;
+    background-size: cover;
+}
+
+
+</style>
