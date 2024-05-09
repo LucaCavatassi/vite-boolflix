@@ -9,7 +9,7 @@ export default {
             jpFlag: "jp_emoji",
             skFlag: "sk_emoji",
             cnFlag: "ch_emoji",
-            noImage: "no_image"
+            noImage: "no_image",
         }
     },
 
@@ -25,9 +25,18 @@ export default {
         getPosters(index) {
             return "https://image.tmdb.org/t/p/w500" + this.store.moviesArray[index].poster_path
         },
+
         getBackdrop(index) {
             return "https://image.tmdb.org/t/p/w500" + this.store.moviesArray[index].backdrop_path
+        },
+
+        convVote(index) {
+            let vote = parseFloat(this.store.moviesArray[index].vote_average)
+            let splitVote = Math.round(Math.round(vote * 2) / 2) / 2
+            return splitVote
         }
+
+    
     }
 }
 </script>
@@ -73,7 +82,57 @@ export default {
                             <!-- LANG_FLAG -->
                             <!-- VOTE -->
                             <li class="list-group-item px-0">
-                                {{ element.vote_average }}
+                                <!-- STARS -->
+
+                                <span v-if="convVote(index) ===  0 || convVote(index) ===  0.5">
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </span>
+
+                                <span v-else-if="convVote(index) ===  1 || convVote(index) ===  1.5">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </span>
+
+                                <span v-else-if="convVote(index) ===  2 || convVote(index) ===  2.5">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </span>
+
+                                <span v-else-if="convVote(index) ===  3 || convVote(index) ===  3.5">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </span>
+
+                                <span v-else-if="convVote(index) ===  4 || convVote(index) ===  4.5">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </span>
+
+                                <span v-else-if="convVote(index) ===  5">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                                <!-- /STARS -->
+                                
                             </li>
                             <!-- VOTE -->
                         </ul>
