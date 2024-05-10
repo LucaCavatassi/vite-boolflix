@@ -45,6 +45,8 @@ a{
 
 .navbar-brand:hover {
     text-shadow: 0 0 10px #E50914;
+    transform: scale(1.1);
+    transition-duration: 1s;
     color: #E50914;
 }
 
